@@ -39,5 +39,6 @@ End Function
 
 oo="{""provider"":""access"",""dataSource"":""../db/db.mdb""}"
 set conn1=Jexs.Adodb.connection(JSON.parse(oo))
-Jexs.ado(conn1).execute("Select * From [testUser]",1).output("json")
+set obj=Jexs.ado(conn1).execute("Select * From [testUser]",0).data
+Response.Write(obj.length)
 %>

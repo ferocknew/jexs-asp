@@ -114,6 +114,7 @@ Jexs.extend({
 });
 Jexs.adodb=function(o){
    o.Version?this._conn=o:(o.conn ? this._conn=o.conn : this.connection(o));
+   //this.length=0;
 };
 Jexs.extend(Jexs.adodb,{
     connection:function(o){
@@ -157,15 +158,10 @@ Jexs.extend(Jexs.adodb.prototype,{
         return this;
     },
     execute:function(sql,RType){
-        var rs =new ActiveXObject("ADODB.Recordset");
-        rs.Open(sql, this._conn,1,1);
-        if(rs.EOF||rs.BOF)return [];
-        var FieldsName = new Array();//字段名
-        for (var i = 0; i < rs.Fields.Count; i++) {
-            FieldsName[i] = rs.Fields(i).Name;
-        }
-        this.data=Jexs.vBRows2Obj(rs.GetRows,FieldsName, rs.Fields.Count,RType);
-        rs = null;
+        var rs =this._conn.Execute(sql);//=new ActiveXObject("ADODB.Recordset");
+        //rs.Open(sql, this._conn,1,1);
+		this._rs=rs;
+        if(RType!=null) this.fetch(RType);
         return this;
     },
     output:function(type){
@@ -175,8 +171,22 @@ Jexs.extend(Jexs.adodb.prototype,{
     getConn:function(){
         return this._conn;
     },
-    fetch:function(){
-        return this.data;
-    }
+    fetch:function(RType){
+		var rs=this._rs;
+		if(rs.EOF||rs.BOF)return [];
+        var FieldsName = new Array();//字段名
+        for (var i = 0; i < rs.Fields.Count; i++) {
+            FieldsName[i] = rs.Fields(i).Name;
+        }
+        this.data=Jexs.vBRows2Obj(rs.GetRows,FieldsName, rs.Fields.Count,RType);
+        rs = null;
+		this._rs=null;
+		//this.length=0;
+		//Array.prototype.push.apply(this,this.data);
+        return this;
+    },
+	getData:function(){
+		return this.data;
+	}
     
 });
