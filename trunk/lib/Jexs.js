@@ -54,13 +54,13 @@ Jexs.init = function(){
 };
 Jexs.init.prototype = Jexs.prototype;
 Jexs.extend(Jexs.prototype, {
+    version: "0.1",
     output: function(str, type){
         Jexs.output(str, type);
     }
 });
 Jexs.fn = Jexs.prototype;
 Jexs.extend({
-	version:"0.2",
     output: function(data, type){
         var str = "";
         switch (type) {
@@ -108,11 +108,17 @@ Jexs.extend({
     js: function(words, RType){
         if (RType == 1) {
             Jexs.output("<meta http-equiv=\"Content-Type\" content=\"text/html; charset=utf-8\" /><script>" + words + "</script>");
+			return this;
         }
         else {
             Jexs.output("<script>" + words + "</script>");
+			return this;
         }
-    }
+    },
+	vb:function(data){
+		return new Jexs.vbo(data);
+	}
+
 });
 Jexs.adodb = function(o){
     o.Version ? this._conn = o : (o.conn ? this._conn = o.conn : this.connection(o));
@@ -190,13 +196,23 @@ Jexs.extend(Jexs.adodb.prototype, {
         return this;
     },
     getData: function(){
-        if (this.hasOwnProperty("data")) {
-            return this.data;
-        }
-        else {
-            return []
-        }
+		if (this.hasOwnProperty("data")) {return this.data;
+		}else{return []}
 
-        //if(rs==null){return [];}else{return this.data;}
+		//if(rs==null){return [];}else{return this.data;}
+    }
+});
+//vb数组操作
+Jexs.vbo=function(data){
+	this.vbdata=data;
+}
+Jexs.extend(Jexs.vbo.prototype,{
+	getRows:function(FieldsNameArray_a, fieldslen, RType){
+		this.data=Jexs.vBRows2Obj(this.vbdata,FieldsNameArray_a, fieldslen, RType);
+		return this;
+	},
+	output: function(type){
+        Jexs.output(this.data, type);
+        return this;
     }
 });
