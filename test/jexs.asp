@@ -20,57 +20,51 @@ Session.CodePage=65001;
 //Response.Write(rs.GetRows.toArray())//dd,0
 
 function json2xml(o, tab,tag) {
-   var toXml = function(v, name, ind) {
-      var xml = "";
-	  if (v instanceof Array) {
-         for (var i=0, n=v.length; i<n; i++)
-            xml += ind + toXml(v[i], name, ind+"\t") + "\n";
-      }
-      else if (typeof(v) == "object") {
+	var toXml = function(v, name, ind) {
+	var xml = "";
+	if (v instanceof Array) {
+		for (var i=0, n=v.length; i<n; i++)
+			xml += ind + toXml(v[i], name, ind+"\t") + "\n";
+	}
+	else if (typeof(v) == "object") {
+		var hasChild = false;
+		xml += ind + "<" + name;
+		for (var m in v) {
+			if (m.charAt(0) == "@")
+			xml += " " + m.substr(1) + "=\"" + v[m].toString() + "\"";
+			else
+			hasChild = true;
+		}
+		xml += hasChild ? ">" : "/>";
+		if (hasChild) {
+			for (var m in v) {
+				if (m == "#text")
+					xml += v[m];
+				else if (m == "#cdata")
+					xml += "<![CDATA[" + v[m] + "]]>";
+				else if (m.charAt(0) != "@"){
+					xml += toXml(v[m], m, ind+"\t");
+				}
+			}
+			xml += (xml.charAt(xml.length-1)=="\n"?ind:"") + "</" + name + ">";
+		}
+	}
+	else {
+		var d="";
+		d=String(v).replace(/&/g,"&amp;");
+		xml += ind + "<" + name + ">" + d.toString().replace(/</g,"&lt;").replace(/>/g,"&gt;") +  "</" + name + ">";
+	}
 
-         var hasChild = false;
-         xml += ind + "<" + name;
-
-         for (var m in v) {
-            if (m.charAt(0) == "@")
-               xml += " " + m.substr(1) + "=\"" + v[m].toString() + "\"";
-            else
-               hasChild = true;
-         }
-         xml += hasChild ? ">" : "/>";
-
-         if (hasChild) {
-            for (var m in v) {
-               if (m == "#text")
-                  xml += v[m];
-               else if (m == "#cdata")
-                  xml += "<![CDATA[" + v[m] + "]]>";
-               else if (m.charAt(0) != "@"){
-                  xml += toXml(v[m], m, ind+"\t");
-
-				  }
-            }
-
-            xml += (xml.charAt(xml.length-1)=="\n"?ind:"") + "</" + name + ">";
-         }
-      }
-      else {
-
-         xml += ind + "<" + name + ">" + String(v).toString().replace("<","&lt;").replace(">","&gt;") +  "</" + name + ">";
-      }
-
-      return xml;
-   }, xml="";
-
-  if( o instanceof Array){
-	 var t={};
-	 t[tag]=o;
-	 o=t;
-
-   }
-   for (var m in o)
-      xml += toXml(o[m], m, "");
-   return tab ? xml.replace(/\t/g, tab) : xml.replace(/\t|\n/g, "");
+	return xml;
+	}, xml="";
+	if( o instanceof Array){
+		var t={};
+		t[tag]=o;
+		o=t;
+	}
+	for (var m in o)
+	xml += toXml(o[m], m, "");
+	return tab ? xml.replace(/\t/g, tab) : xml.replace(/\t|\n/g, "");
 }
 </script>
 <%
@@ -86,7 +80,7 @@ Set obj=Jexs.ado(conn1).execute("select * from [testUser]",1).getData()
 jsoncode="[{""ID"":1,""userName"":""test"",""userSex"":""boy"",""userTest"":2,""userTime"":""Mon Apr 26 22:33:59 UTC+0800 2010""},{""ID"":2,""userName"":""test"",""userSex"":""boy"",""userTest"":2,""userTime"":""Mon Apr 26 22:33:59 UTC+0800 2010""},{""ID"":3,""userName"":""\u6211\u4eec"",""userSex"":""http:\/\/www.online.sh.cn"",""userTest"":4,""userTime"":""Mon Apr 26 22:33:59 UTC+0800 2010""}]"
 Response.Charset = "utf-8"
 Response.ContentType="text/xml"
-Response.Write("<?xml version=""1.0"" encoding=""utf-8""?>")
+Response.Write("<?xml version=""1.0"" encoding=""utf-16""?>")
 Response.Write("<root>")
 Response.Write(json2xml(obj,false,"item"))
 Response.Write("</root>")
