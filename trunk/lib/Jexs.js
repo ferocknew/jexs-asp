@@ -49,9 +49,7 @@ Jexs.extend = function(){
     // Return the modified object
     return target;
 };
-Jexs.init = function(){
-
-};
+Jexs.init = function(){};
 Jexs.init.prototype = Jexs.prototype;
 Jexs.extend(Jexs.prototype, {
     version: "0.1",
@@ -65,6 +63,15 @@ Jexs.extend({
         var str = "";
         switch (type) {
             case "xml":
+				switch(typeof(data)){
+					case "array":
+					str = json2xml(data,false,"item");
+					break;
+					case "object":
+						var newarray=[data];
+					str = json2xml(newarray,false,"item");
+					break;
+				}
                 break;
             case "json":
                 str = JSON.stringify(data);
@@ -102,10 +109,20 @@ Jexs.extend({
         }
         return data;
     },
+	//adodb根方法
     ado: function(args){
         return new Jexs.adodb(args)
     },
-    js: function(words, RType){
+	//vb相关根方法
+	vb:function(data){
+		return new Jexs.vbo(data);
+	},
+	//string转对象的根方法
+	parse:function(data){
+		return new Jexs.parsefn(data);
+	},
+	// 输出js
+	js: function(words, RType){
         if (RType == 1) {
             Jexs.output("<meta http-equiv=\"Content-Type\" content=\"text/html; charset=utf-8\" /><script>" + words + "</script>");
 			return this;
@@ -114,11 +131,7 @@ Jexs.extend({
             Jexs.output("<script>" + words + "</script>");
 			return this;
         }
-    },
-	vb:function(data){
-		return new Jexs.vbo(data);
-	}
-
+    }
 });
 Jexs.adodb = function(o){
     o.Version ? this._conn = o : (o.conn ? this._conn = o.conn : this.connection(o));
@@ -216,3 +229,61 @@ Jexs.extend(Jexs.vbo.prototype,{
         return this;
     }
 });
+//转换对象
+Jexs.parsefn=function(data){
+	this.Jsondata=JSON.parse(data);
+};
+Jexs.extend(Jexs.parsefn.prototype,{
+	output: function(type){
+        Jexs.output(this.Jsondata, type);
+        return this;
+    }
+});
+// 转换xml
+function json2xml(o, tab,tag) {
+	var toXml = function(v, name, ind) {
+	var xml = "";
+	if (v instanceof Array) {
+		for (var i=0, n=v.length; i<n; i++)
+			xml += ind + toXml(v[i], name, ind+"\t") + "\n";
+	}
+	else if (typeof(v) == "object") {
+		var hasChild = false;
+		xml += ind + "<" + name;
+		for (var m in v) {
+			if (m.charAt(0) == "@")
+			xml += " " + m.substr(1) + "=\"" + v[m].toString() + "\"";
+			else
+			hasChild = true;
+		}
+		xml += hasChild ? ">" : "/>";
+		if (hasChild) {
+			for (var m in v) {
+				if (m == "#text")
+					xml += v[m];
+				else if (m == "#cdata")
+					xml += "<![CDATA[" + v[m] + "]]>";
+				else if (m.charAt(0) != "@"){
+					xml += toXml(v[m], m, ind+"\t");
+				}
+			}
+			xml += (xml.charAt(xml.length-1)=="\n"?ind:"") + "</" + name + ">";
+		}
+	}
+	else {
+		var d="";
+		d=String(v).replace(/&/g,"&amp;");
+		xml += ind + "<" + name + ">" + d.toString().replace(/</g,"&lt;").replace(/>/g,"&gt;") +  "</" + name + ">";
+	}
+
+	return xml;
+	}, xml="";
+	if( o instanceof Array){
+		var t={};
+		t[tag]=o;
+		o=t;
+	}
+	for (var m in o)
+	xml += toXml(o[m], m, "");
+	return tab ? xml.replace(/\t/g, tab) : xml.replace(/\t|\n/g, "");
+}
