@@ -1,3 +1,11 @@
+/*
+ *Jexs ASP Library v0.1
+ *
+ * Copyright 2010, Trarck & Jonah.Fu
+ * Dual licensed under the MIT or GPL Version 2 licenses.
+ *
+ * Date: Tue May 18 10:33:48 2010 +0800
+ */
 var Jexs = function(o){
     return new Jexs.init(o);
 };
