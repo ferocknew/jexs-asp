@@ -59,13 +59,13 @@ Jexs.extend = function(){
 Jexs.init = function(){};
 Jexs.init.prototype = Jexs.prototype;
 Jexs.extend(Jexs.prototype, {
-    version: "0.1",
     output: function(str, type){
         Jexs.output(str, type);
     }
 });
 Jexs.fn = Jexs.prototype;
 Jexs.extend({
+	version: "0.1",
     output: function(data, type){
         var str = "";
         switch (type) {
