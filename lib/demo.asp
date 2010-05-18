@@ -3,5 +3,5 @@
 <script Language="JScript" runat="server" src="../lib/jexs.js"></script>
 version:
 <%
-Response.Write(Jexs.version);
+Response.Write(Jexs.version)
 %>
