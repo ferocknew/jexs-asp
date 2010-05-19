@@ -1,0 +1,145 @@
+/*整个窗口的参数设置*/
+div,span{overflow:hidden;}
+.WinBox{
+	padding:0;
+	margin:0;
+}
+/*窗口的标题项参数设置*/
+.WinBox .TitleBar{
+	width:100%;
+	padding:0;
+	margin:0;
+}
+.WinBox .TitleBar .TitleBar_Left{
+	float:left;
+	height:100%;
+	padding:0;
+	margin:0;
+}
+.WinBox .TitleBar .TitleBar_Title{
+	float:left;
+	height:100%;
+	padding:9px 0 0 4px;
+	margin:0;
+	font-size:14px;
+	font-family:宋体,黑体;
+	cursor:default;
+	text-align:left;
+}
+.WinBox .TitleBar .TitleBar_Title .Title{
+	float:left;
+	position:absolute;
+	color:#666;
+	line-height:20px;
+}
+.WinBox .TitleBar .TitleBar_Title .Title_back{
+	float:left;
+	position:absolute;
+	color:#FFF;
+	margin:1px 0 0 1px;
+	line-height:20px;
+}
+.WinBox .TitleBar .TitleBar_Title .small{
+	float:right;
+	margin:0;
+	cursor:hand;
+}
+.WinBox .TitleBar .TitleBar_Title .rebig{
+	float:right;
+	margin:0;
+	cursor:hand;
+}
+.WinBox .TitleBar .TitleBar_Title .close{
+	float:right;
+	margin:0;
+	cursor:hand;
+}
+.WinBox .TitleBar .TitleBar_Right{
+	float:right;
+	position:relative;
+	height:100%;
+	padding:0;
+	margin:0;
+}
+/*窗口的内容项参数设置*/
+.WinBox .Content{
+	width:100%;
+	padding:0;
+	margin:0;
+}
+.WinBox .Content .Content_Left{
+	float:left;
+	height:100%;
+	padding:0;
+	margin:0;
+}
+.WinBox .Content .WinBox_Content{
+	float:left;
+	height:100%;
+	padding:0;
+	margin:0;
+	background:#FFF;/*窗口的内容项背景设置*/
+	text-align:center;
+}
+.WinBox .Content .WinBox_Content #Loader{
+	top:50%;
+    position: relative;  
+	margin:-12px 0 0 0;
+}
+.WinBox .Content .WinBox_Content #Loader .Load_Font{
+	font-size:12px;
+    position: relative;  
+	margin:0 0 0 14px;
+	top:-8px;
+}
+.WinBox .Content .Content_Right{
+	float:right;
+	height:100%;
+	padding:0;
+	margin:0;
+}
+/*窗口的底边项参数设置*/
+.WinBox .BottomBar{
+	width:100%;
+	padding:0;
+	margin:0;
+}
+.WinBox .BottomBar .BottomBar_Left{
+	float:left;
+	height:100%;
+	padding:0;
+	margin:0;
+}
+.WinBox .BottomBar .BottomBar_Center{
+	float:left;
+	height:100%;
+	padding:0;
+	margin:0;
+}
+.WinBox .BottomBar .BottomBar_Right{
+	position:relative;
+	float:right;
+	height:100%;
+	padding:0;
+	margin:0;
+}
+
+
+/*窗口的透明度切换*/
+.WinBox_unSelect{
+	filter:alpha(opacity=60);
+}
+.WinBox_Select{
+	filter:alpha(opacity=100);
+}
+/*模式窗口的背景层样式*/
+.WinBox_modal{
+	width:100%;
+	height:100%;
+	position:absolute;
+	top:0;
+	left:2px;
+	background-image:url(../images/transparent.gif);
+	filter:alpha(opacity=50);
+	zindex:100;
+}

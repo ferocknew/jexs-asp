@@ -1,0 +1,90 @@
+/* CSS Document */
+#Block_Box{
+	float:left;
+	width:100%;
+	height:350px;
+	overflow:hidden;
+}
+#Design_Box{
+	float:left;
+	border:1px solid #666;
+	background:#FEFEFE;
+	width:400px;
+	height:295px;
+	overflow:auto;
+}
+#BlockList{
+	float:left;
+	border:1px solid #666;
+	background:#FEFEFE;
+	width:100%;
+	height:350px;
+	overflow:auto;
+}
+#Design_Code{
+	float:left;
+	width:400px;
+	height:295px;
+}
+#Design_Code_2{
+	float:left;
+	width:100%;
+	height:350px;
+}
+#Design_Button{
+	width:100%;
+	float:left;
+	margin:8px 0 0 0;
+	text-align:center;
+}
+#Design_Tools{float:left;}
+#Design_Tools span{
+	float:left;
+	margin:0 4px 0 0;
+	padding:4px;
+}
+#BlockObjects,
+#BlockTools{
+	float:left;
+	margin:0;
+}
+#BlockObjects .title,
+#BlockTools .title{
+	margin:0 -9px 0 0;
+}
+#BlockObjects li,
+#BlockTools li,
+#BlockModelType li,
+#BlockDisplay li{
+	float:left;
+	list-style-type:none;
+	padding:4px;
+	cursor:hand;
+}
+#createBlock{
+	cursor:hand;
+}
+#Design_Attribute{
+	float:left;
+	width:100%;
+	border:1px solid #666;
+	margin:2px 0 0 0;
+	height:20px;
+	padding:3px 0 0 4px;
+}
+#List_PageSize{
+	margin:0 0 12px 0;
+}
+#cols{width:300px;}
+
+/* JCP_BlockTools */
+#block_sql{
+	width:100%;
+	height:100px;
+	margin:0 0 8px 0;
+}
+.data_cols{
+	width:100%;
+	margin:6px 0 0 20px;
+	cursor:hand;
+}

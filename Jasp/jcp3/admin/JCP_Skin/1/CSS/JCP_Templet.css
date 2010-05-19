@@ -1,0 +1,115 @@
+/* CSS Document */
+
+.over{
+	border:1px solid #FF0000;
+}
+.out{
+	border:1px dotted #DDDDDD;
+}
+.focus{
+	border:1px solid green;
+}
+
+#ServerView_Menu{
+	border-bottom:1px solid #999999;
+	width:100%;
+	padding:8px 0 6px 10px;
+	margin:0;
+	float:left;
+}
+#ServerView_Menu span{
+	float:left;
+	margin:0 14px 0 0;
+	cursor:hand;
+}
+#ServerView_Box{
+	width:100%;
+	float:left;
+	padding:10px 10px 4px 10px;
+	height:310px;
+	background-color:#ffffff;
+	overflow:auto;
+}
+#ServerView_Box span{
+	float:left;
+	width:88px;
+	height:98px;
+	text-align:center;
+	margin:2px;
+	cursor:hand;
+	overflow:hidden;
+}
+#ServerPath{
+	width:100%;
+	height:20px;
+	float:left;
+	padding:3px 0 0 8px;
+	border-top:1px solid #bbbbbb;
+}
+.ServerView_out{
+	border:1px dotted #FFFFFF;
+	background-color:#FFFFFF;
+}
+.ServerView_focus{
+	border:1px solid green;
+	background-color:#DDFFDD;
+}
+.ServerView_over{
+	border:1px solid #FF0000;
+	background-color:#FFFFFF;
+}
+
+
+.item{
+	width:100%;
+	float:left;
+	height:20px;
+	background-color:#FFFFFF;
+	margin:2px 0 0 0;
+	border-top:1px solid #bbbbbb;
+	border-bottom:1px solid #bbbbbb;
+	padding:3px 0 0 0;
+	cursor:hand;
+}
+.item .item_checkbox{
+	float:left;
+	width:40px;
+	text-algin:center;
+	margin:-4px 0 0 0;
+}
+.item .item_title{
+	float:left;
+	width:200px;
+	text-align:center;
+	overflow:hidden;
+}
+.item .classname{
+	float:left;
+	width:100px;
+	text-align:center;
+}
+.item .item_exp{
+	float:left;
+}
+.item_page{
+	margin:10px 0 0 0;
+}
+
+.templet_button{
+	width:100%;
+	float:left;
+	text-align:center;
+	margin:0 0 8px 0;
+}
+.yellow{background-color:yellow;}
+.white{background-color:#FFFFFF;}
+
+.select_templettype{
+	float:left;
+}
+
+.DesignCodeContent{
+	font-size:14px;
+	padding:0;
+	margin:0;
+}

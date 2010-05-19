@@ -1,0 +1,55 @@
+/* CSS Document */
+#Design_Box{
+	float:left;
+	border:1px solid #666;
+	background:#FEFEFE;
+	width:100%;
+	height:350px;
+	overflow:auto;
+}
+#Design_Code{
+	float:left;
+	width:100%;
+	height:350px;
+}
+#Design_Button{
+	width:100%;
+	float:left;
+	margin:8px 0 0 0;
+	text-align:center;
+}
+#Design_Tools{float:left;}
+#Design_Tools span{
+	float:left;
+	margin:0 4px 0 0;
+	padding:4px;
+}
+#TempletObjects,
+#TempletTools{
+	float:left;
+	margin:0;
+}
+#TempletObjects .title,
+#TempletTools .title{
+	margin:0 -9px 0 0;
+}
+#TempletObjects li,
+#TempletTools li,
+#TempletModelType li,
+#TempletDisplay li{
+	float:left;
+	list-style-type:none;
+	padding:4px;
+	cursor:hand;
+}
+#createTemplet{
+	cursor:hand;
+}
+#Design_Attribute{
+	float:left;
+	width:100%;
+	border:1px solid #666;
+	margin:2px 0 0 0;
+	height:20px;
+	padding:3px 0 0 4px;
+}

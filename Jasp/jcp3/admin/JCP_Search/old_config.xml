@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="gb2312"?>
+<jcp-plug>
+	<name>搜索引擎</name>
+	<logo>JCP_Search</logo>
+	<type>1</type>
+	<version>1.0</version>
+	<author>likeus</author>
+	<link>QQ:37802181</link>
+	<copyright>KTOM.CN</copyright>
+	<explain>基于JCP V3.0平台的“搜索引擎”</explain>
+	<createtime>2008.5.11</createtime>
+	<system-need>
+		<system>
+			<title>搜索引擎</title>
+			<logo></logo>
+			<intro-param/>
+		</system>
+	</system-need>
+	<menus>
+		<menu>
+			<title>新建引擎</title>
+			<url>../JCP_Search/JCP_NewSearch.asp</url>
+		</menu>
+		<menu>
+			<title>引擎管理</title>
+			<url>../JCP_Search/JCP_Manage.asp</url>
+		</menu>
+		<menu>
+			<title>前台同步</title>
+			<url>../JCP_Search/JCP_SameSystemInfo.asp</url>
+		</menu>
+	</menus>
+	<database />
+	<path-info>
+		<fore-folder>ForeFolder</fore-folder>
+		<back-folder>BackFolder</back-folder>
+	</path-info>
+	<param-out />
+</jcp-plug>

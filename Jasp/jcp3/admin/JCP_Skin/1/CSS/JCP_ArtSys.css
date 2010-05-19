@@ -1,0 +1,98 @@
+/* CSS Document */
+body{
+	overflow-x:hidden;
+}
+
+#ArtSys{
+	float:left;
+	width:100%;
+	height:300px;
+	border:1px dotted #666666;
+	background:#EFEFEF url(../images/preview_back.gif);
+	padding:10px;
+}
+#ArtSys .Items{
+	width:100%;
+	margin:10px 0 0 0;
+	float:left;
+}
+#ArtSys .label{
+	float:left;
+	width:80px;
+	text-align:right;
+	padding:0 4px 0 0;
+	margin:5px 0 0 0;
+}
+#ArtSys .content{
+	float:left;
+	text-align:left;
+	padding:0;
+}
+#ArtSys .sys_button{
+	float:left;
+	width:100%;
+	text-align:center;
+	padding:0;
+}
+#ArtSys .tools{
+	float:left;
+	width:70px;
+	text-align:center;
+	padding:0;
+	margin:3px 0 0 0;
+}
+.save{
+	width:100%;
+	float:left;
+	margin:10px 0 0 0;
+	text-align:center;
+}
+
+
+
+
+/*窗口主体部分载入内容后的部分样式*/
+.item{
+	float:left;
+	margin:6px 0 0 0;
+	width:100%;
+}
+.button{
+	float:left;
+	text-align:center;
+	width:100%;
+	clear:both;
+	margin:6px 0 0 0;
+}
+.item .label{
+	float:left;
+	width:80px;
+	text-align:right;
+	margin:5px 0 0 0;
+}
+.item .text{
+	float:left;
+}
+
+
+#GuideBar{
+	float:left;
+}
+
+#ArtSys_Box{
+	float:left;
+	width:0;
+	height:0;
+	position:relative;
+	margin:26px 0 0 0;
+}
+
+fieldset{
+	width:300px;
+	float:left;
+	margin:20px 10px 0 0;
+}
+#fieldbox{
+	width:100%;
+	float:left;
+}

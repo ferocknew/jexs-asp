@@ -1,0 +1,14 @@
+/* CSS Document */
+.tag_button{
+	width:100%;
+	float:left;
+	text-align:center;
+	margin:0 0 8px 0;
+}
+.linkrscount{
+	float:left;
+	width:100%;
+	text-align:right;
+	height:24px;
+	padding-top:6px;
+}

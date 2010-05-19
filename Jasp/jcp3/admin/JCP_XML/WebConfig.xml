@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="gb2312"?>
+<JCP>
+	<JCP_Site_Name>晋唐网</JCP_Site_Name>
+	<JCP_Site_System_Name>网站管理系统</JCP_Site_System_Name>
+	<JCP_Site_URL>http://www.ktom.cn</JCP_Site_URL>
+	<JCP_System_CopyRight>ktom.cn 2010</JCP_System_CopyRight>
+	<JCP_System_Skin>1</JCP_System_Skin>
+	<JCP_Database_Path>sxsz_Database</JCP_Database_Path>
+	<JCP_Database_Name>access_database.mdb</JCP_Database_Name>
+	<JCP_System_Logo></JCP_System_Logo>
+	<JCP_UploadPath>new_UploadFiles</JCP_UploadPath>
+	<JCP_WebPath>new_Web</JCP_WebPath>
+	<JCP_ScriptPath>new_Script</JCP_ScriptPath>
+	<JCP_WebCssPath>new_Css</JCP_WebCssPath>
+	<JCP_HTMLFileExt>html</JCP_HTMLFileExt>
+	<JCP_HTMLFile_Index>index</JCP_HTMLFile_Index>
+	<JCP_System_Color_MainFont>#333333</JCP_System_Color_MainFont>
+	<JCP_System_Color_SystemFont>#000000</JCP_System_Color_SystemFont>
+	<JCP_System_Color_LightFont>#FF0000</JCP_System_Color_LightFont>
+	<JCP_System_Color_Main>#E4E7E9</JCP_System_Color_Main>
+	<JCP_System_Color_Back>#F2F3F4</JCP_System_Color_Back>
+	<JCP_System_Color_Dip>#737373</JCP_System_Color_Dip>
+	<JCP_System_Color_Fleet>#FFFFFF</JCP_System_Color_Fleet>
+	<JCP_Win_Top_Height>64</JCP_Win_Top_Height>
+	<JCP_Win_Menu_Width>150</JCP_Win_Menu_Width>
+</JCP>

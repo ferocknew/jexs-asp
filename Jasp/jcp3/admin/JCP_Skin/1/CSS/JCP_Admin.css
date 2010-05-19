@@ -1,0 +1,68 @@
+/* CSS Document */
+
+#adminset{
+	float:left;
+	width:400px;
+	border:1px dotted #000;
+	background-color:#FFF;
+	padding:10px;
+}
+
+#adminlist{
+	float:left;
+	width:158px;
+	height:0;
+	border:1px solid #000;
+	margin-left:4px;
+	background-color:#FFF;
+	padding-bottom:50px;
+}
+
+.item{
+	float:left;
+	margin:4px 0 4px 0;
+	width:100%;
+}
+.item .label{
+	font-size:14px;
+}
+.item .buttons{
+	width:100%;
+	height:30px;
+	text-align:center;
+	padding-top:8px;
+}
+.label{
+	float:left;
+	margin-top:4px;
+}
+#adminname,#adminpwd,#adminpwdcheck{
+	width:200px;
+}
+#adminexp{
+	width:376px;
+	height:60px;
+}
+#adminpurv{
+	width:302px;
+}
+
+#adminlist .admintype{
+	float:left;
+	width:100%;
+	margin-bottom:2px;
+}
+#adminlist .adminitem{
+	float:left;
+	padding-left:16px;
+	width:100%;
+	margin-bottom:2px;
+}
+
+#exp{
+	float:left;
+	clear:both;
+	padding:10px;
+	width:400px;
+	line-height:20px;
+}

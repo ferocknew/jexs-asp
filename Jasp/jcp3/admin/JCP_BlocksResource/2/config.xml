@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="gb2312"?>
+<JCP_Blocks>
+	<name>限数文字列表JS版</name>
+	<version>v1.0</version>
+	<author>likeus</author>
+	<link>QQ:37802181</link>
+	<copyright>KTOM.CN</copyright>
+	<explain>用于类似TOP10.js短列表JS文件，供多页面调用</explain>
+	<createtime>2007.09.24</createtime>
+	<mainfile>index.asp</mainfile>
+	<managefile>manage.asp</managefile>
+	<filelist>
+		<file>
+			<filename>启动文件</filename>
+			<filepath>index.asp</filepath>
+		</file>
+		<file>
+			<filename>修改模块文件</filename>
+			<filepath>edit.asp</filepath>
+		</file>
+		<file>
+			<filename>响应程序</filename>
+			<filepath>action.asp</filepath>
+		</file>
+		<file>
+			<filename>模块处理文件</filename>
+			<filepath>manage.asp</filepath>
+		</file>
+		<file>
+			<filename>模块源配置文件</filename>
+			<filepath>config.xml</filepath>
+		</file>
+		<file>
+			<filename>帮助文件</filename>
+			<filepath>readme.txt</filepath>
+		</file>
+	</filelist>
+</JCP_Blocks>
