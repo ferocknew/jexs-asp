@@ -1,0 +1,80 @@
+h5
+{
+	margin:0;
+	padding:4px 0 0 30px;
+	font-size:14px;
+	text-align:left;
+	height:20px;
+	background:url(../tree/Note.gif) no-repeat 4 0;
+}
+.TreeMenu{
+	position:absolute;
+	left:0;
+	top:0;
+}
+
+.TreeMenu img.s
+{
+	cursor:hand;
+	vertical-align:middle;
+	align:absmiddle;
+}
+.TreeMenu .classitem{
+	cursor:hand;
+}
+.TreeMenu li
+{
+	list-style:none;
+	font:12px tahoma,宋体,sans-serif;
+}
+.Closed ul
+{
+	display:none;
+}
+.Child img.s
+{
+	background:none;
+	cursor:default;
+}
+
+#CategoryTree{
+	padding:0;
+	margin:4px 0 0 -14px;
+	width:500px;
+}
+
+#CategoryTree ul
+{
+	margin:0 0 0 17px;
+}
+#CategoryTree img.s
+{
+	width:34px;
+	height:20px;
+}
+#CategoryTree .Opened img.s
+{
+	background:url(../tree/opened.gif) no-repeat 0 2px;
+}
+#CategoryTree .Closed img.s
+{
+	background:url(../tree/closed.gif) no-repeat 0 2px;
+}
+#CategoryTree .Child img.s
+{
+	background:url(../tree/child.gif) no-repeat 13px 3px;
+}
+
+#CategoryTree
+{
+	float:left;
+	padding:2px;
+}
+
+
+#Purv_Menu_List{
+	float:left;
+	width:100%;
+	height:370px;
+	overflow:auto;
+}

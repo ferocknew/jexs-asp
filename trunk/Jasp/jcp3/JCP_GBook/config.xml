@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="gb2312"?>
+<jcp-plug>
+	<name>留言板</name>
+	<logo>JCP_GBook</logo>
+	<type>1</type>
+	<version>1.0</version>
+	<author>likeus</author>
+	<link>QQ:37802181</link>
+	<copyright>KTOM.CN</copyright>
+	<explain>基于JCP V3.0平台的“留言板”</explain>
+	<createtime>2008.5.8</createtime>
+	<system-need>
+		<system>
+			<title>留言板</title>
+			<logo></logo>
+			<intro-param>
+				<param>
+					<logo>GBook_UserName</logo>
+					<title>用户帐户</title>
+					<need-logo></need-logo>
+				</param>
+				<param>
+					<logo>GBook_UserID</logo>
+					<title>用户ID</title>
+					<need-logo></need-logo>
+				</param>
+				<param>
+					<logo>GBook_Logined</logo>
+					<title>用户状态</title>
+					<need-logo></need-logo>
+				</param>
+			</intro-param>
+		</system>
+	</system-need>
+	<menus>
+		<menu>
+			<title>前台同步</title>
+			<url>../JCP_GBook/JCP_SameSystemInfo.asp</url>
+		</menu>
+		<menu>
+			<title>留言管理</title>
+			<url>../JCP_GBook/JCP_Manage.asp</url>
+		</menu>
+	</menus>
+	<database />
+	<path-info>
+		<fore-folder>GBook_ForeFolder</fore-folder>
+		<back-folder>GBook_BackFolder</back-folder>
+	</path-info>
+	<param-out />
+</jcp-plug>

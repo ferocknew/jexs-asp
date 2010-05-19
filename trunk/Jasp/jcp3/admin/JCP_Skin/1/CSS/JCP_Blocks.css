@@ -1,0 +1,30 @@
+/* CSS Document */
+
+form{
+	float:left;
+}
+
+.blockbody_item{
+	float:left;
+	width:100%;
+	margin-top:10px;
+}
+
+.blockbody_item .content textarea{
+	width:100%;
+	height:100px;
+}
+
+.blockbody_item .content #blockname{
+	width:100px;
+}
+.blockbody_item .content #blockexp{
+	width:300px;
+}
+
+.blockbuttons{
+	float:left;
+	width:100%;
+	margin-top:10px;
+	text-align:center;
+}

@@ -1,0 +1,33 @@
+/* CSS Document */
+
+#push_button{
+	float:left;
+	width:100%;
+	text-align:center;
+	margin-top:16px;
+}
+
+.siteindex{
+	width:100%;
+	padding-left:20px;
+	border-top:1px solid #dddddd;
+	border-bottom:1px solid #dddddd;
+}
+
+.ViewListItem{
+	width:100%;
+	text-align:left;
+	height:18px;
+}
+
+.ViewList_PushList{
+	width:100%;
+	margin:10px;
+	border:1px dotted #000000;
+	background-color:#FFFFFF;
+	padding:6px;
+	line-height:1.6;
+}
+.ViewList_PushList span{
+	width:49%;
+}

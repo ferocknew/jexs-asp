@@ -1,0 +1,11 @@
+/* CSS Document */
+
+.over{
+	border:1px solid #FF0000;
+}
+.out{
+	border:1px dotted #DDDDDD;
+}
+.focus{
+	border:1px solid green;
+}
