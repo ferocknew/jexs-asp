@@ -186,16 +186,15 @@ Jasp.extend(Jasp.adodb.prototype, {
         Jasp.adodb.close(this._conn);
         return this;
     },
-    execute: function(sql, RType){
-        var rs = this._conn.Execute(sql);//=new ActiveXObject("ADODB.Recordset");
-        //rs.Open(sql, this._conn,1,1);
+    exec: function(sql, RType){
+		if(!RType)RType=1;
+        var rs = this._conn.Execute(sql);
         this._rs = rs;
-        if (RType != null)
-            this.fetch(RType);
+		this.fetch(RType);
         return this;
     },
     output: function(type){
-        Jasp.output(this.getData(), type);
+        Jasp.output(this.get(), type);
         return this;
     },
     getConn: function(){
