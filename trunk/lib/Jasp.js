@@ -10,7 +10,7 @@ if(!undefined)undefined==undefined;
 var Jasp = function(o,c){
     return new Jasp.init(o,c);
 };
-var $ = Jasp,uuid=0,expando="Jasp"+now();
+var $ = Jasp,uuid=0,expando="Jasp"+(new Date).getTime();
 Jasp.extend = function(){
     // copy reference to target object
     var target = arguments[0] || {}, i = 1, length = arguments.length, deep = false, options, name, src, copy;
@@ -131,13 +131,13 @@ Jasp.extend({
     ado: function(args){
 		var ado=null;
 		if(args){
-			if(args.expando) {
-				ado= Jasp.cache(args.expando);
-			}else{
+			//if(args.expando) {
+			//	ado= Jasp.cache(args.expando);
+			//}else{
 				ado=new Jasp.adodb(args);
-				Jasp.cache(expando+uuid)=ado;
+			//	Jasp.cache(expando+uuid)=ado;
 				Jasp.adoCache.push(ado);
-			}
+			//}
 		}else{
 			ado=Jasp.adoCache[Jasp.adoCache.length-1];
 		}
@@ -160,14 +160,17 @@ Jasp.extend({
     }
 });
 Jasp.extend(Jasp.fn,{
-	
+
 });
 Jasp.adodb= function(o){
     //o.Version ? this._conn = o : (o.conn ? this._conn = o.conn : this.connection(o));
-	o && this._conn=o.Version?o:(o.conn?o.conn:this.connection(o));
+	this.data=[];
+	if(o){
+		this._conn=o.Version?o:(o.conn?o.conn:this.connection(o));
+	}
     //this.length=0;
 };
-Jasp.extend(Jasp.ado, {
+Jasp.extend(Jasp.adodb, {
     connection: function(o,reCreate){
 		if(!reCreate && this._conn) return this._conn;
         var conn;
@@ -189,7 +192,7 @@ Jasp.extend(Jasp.ado, {
             Jasp.output('<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />数据库连接出错，请检查连接字串!');
             Response.End
         }
-		conn.expando=expando+(++uuid);
+		//conn._expando=expando+(++uuid);
 		this._conn=conn;
         return conn;
     },
@@ -217,6 +220,7 @@ Jasp.extend(Jasp.adodb.prototype, {
         this._rs = rs;
         if (RType != null)
             this.fetch(RType);
+
         return this;
     },
     output: function(type){
@@ -241,6 +245,9 @@ Jasp.extend(Jasp.adodb.prototype, {
         //Array.prototype.push.apply(this,this.data);
         return this;
     },
+	getData:function(){
+		return this.data;
+	},
     get: function(){
         if (this.hasOwnProperty("data")) {
             return this.data;
