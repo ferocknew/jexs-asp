@@ -7,10 +7,10 @@
  * Date: Tue May 18 10:33:48 2010 +0800
  */
 if(!undefined)undefined==undefined;
-var Jasp = function(o){
-    return new Jasp.init(o);
+var Jasp = function(o,c){
+    return new Jasp.init(o,c);
 };
-var $ = Jasp;
+var $ = Jasp,uuid=0,expando="Jasp"+now();
 Jasp.extend = function(){
     // copy reference to target object
     var target = arguments[0] || {}, i = 1, length = arguments.length, deep = false, options, name, src, copy;
@@ -58,7 +58,7 @@ Jasp.extend = function(){
     // Return the modified object
     return target;
 };
-Jasp.init = function(data){
+Jasp.init = function(data,content){
     // Handle $(""), $(null), or $(undefined)
     if (!data) {
         return this;
@@ -73,6 +73,8 @@ Jasp.extend(Jasp.prototype, {
 Jasp.fn = Jasp.prototype;
 Jasp.extend({
     version: "0.1",
+	cache:{},
+	adoCache:[],
     output: function(data, type){
         var str = "";
         switch (type) {
@@ -127,7 +129,19 @@ Jasp.extend({
     },
     //adodb根方法
     ado: function(args){
-        return new Jasp.adodb(args)
+		var ado=null;
+		if(args){
+			if(args.expando) {
+				ado= Jasp.cache(args.expando);
+			}else{
+				ado=new Jasp.adodb(args);
+				Jasp.cache(expando+uuid)=ado;
+				Jasp.adoCache.push(ado);
+			}
+		}else{
+			ado=Jasp.adoCache[Jasp.adoCache.length-1];
+		}
+		return ado;
     },
     //vb相关根方法
     vb: function(data){
@@ -145,12 +159,17 @@ Jasp.extend({
         }
     }
 });
-Jasp.adodb = function(o){
-    o.Version ? this._conn = o : (o.conn ? this._conn = o.conn : this.connection(o));
+Jasp.extend(Jasp.fn,{
+	
+});
+Jasp.adodb= function(o){
+    //o.Version ? this._conn = o : (o.conn ? this._conn = o.conn : this.connection(o));
+	o && this._conn=o.Version?o:(o.conn?o.conn:this.connection(o));
     //this.length=0;
 };
-Jasp.extend(Jasp.adodb, {
-    connection: function(o){
+Jasp.extend(Jasp.ado, {
+    connection: function(o,reCreate){
+		if(!reCreate && this._conn) return this._conn;
         var conn;
         try {
             conn = Server.CreateObject("ADODB.Connection");
@@ -170,6 +189,8 @@ Jasp.extend(Jasp.adodb, {
             Jasp.output('<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />数据库连接出错，请检查连接字串!');
             Response.End
         }
+		conn.expando=expando+(++uuid);
+		this._conn=conn;
         return conn;
     },
     close: function(conn){
