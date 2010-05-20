@@ -84,19 +84,19 @@
                         result[6] = v;
                 }
             }
-            
+
             var hours = +result[3];
             if (amPm === 'p' && hours < 12) {
                 result[3] = hours + 12; //e.g., 3pm -> 15
             }
-            else 
+            else
                 if (amPm === 'a' && hours == 12) {
                     result[3] = 0; //12am -> 0
                 }
-            
+
             //TODO: implement a getWeekday() method in order to test
             //validity of input strings containing 'EEE' or 'EEEE'...
-            
+
             var dateObject = new Date(result[0], result[1], result[2], result[3], result[4], result[5], result[6]); // Date
             if (options.strict) {
                 dateObject.setFullYear(result[0]);
@@ -114,7 +114,7 @@
             pattern = this.escapeString(pattern);
             tokens = tokens || [];
             options = options || [];
-            
+
             if (!options.strict) {
                 pattern = pattern.replace(" a", " ?a");
             } // kludge to tolerate no space before am/pm
@@ -201,11 +201,11 @@
                         s = ".*";
                     //				console.debug("parse of date format, pattern=" + pattern);
                 }
-                
+
                 if (tokens) {
                     tokens.push(match);
                 }
-                
+
                 return "(" + s + ")"; // add capture
             }).replace(/[\xa0 ]/g, "[\\s\\xa0]"); // normalize whitespace.  Need explicit handling of \xa0 for IE.
         },
@@ -220,7 +220,11 @@
         }
     }
     var datefn = function(value, pattern){
-        this._date = date.dateParse(value, pattern);
+		if (typeof value=="date") {
+			 this._date =new Date(value);
+		}else{
+			this._date = date.dateParse(value, pattern);
+		}
     }
     $.extend({
         date: function(value, pattern){
@@ -229,6 +233,17 @@
     });
     $.extend(datefn.prototype, {
         output: function(type){
+			switch(typeof (this._date)){
+				case "string":
+					this._date=[this._date];
+					break;
+				case "date":
+					this._date=[this._date+""];
+					break;
+				case "object":
+					this._date=[this._date.toString()];
+					break;
+			}
             $.output(this._date, type);
             return this;
         },
@@ -246,10 +261,10 @@
                 "q+": Math.floor((this._date.getMonth() + 3) / 3), //quarter
                 "S": this._date.getMilliseconds() //millisecond
             }
-            if (/(y+)/.test(format)) 
+            if (/(y+)/.test(format))
                 format = format.replace(RegExp.$1, (this._date.getFullYear() + "").substr(4 - RegExp.$1.length));
-            for (var k in o) 
-                if (new RegExp("(" + k + ")").test(format)) 
+            for (var k in o)
+                if (new RegExp("(" + k + ")").test(format))
                     format = format.replace(RegExp.$1, RegExp.$1.length == 1 ? o[k] : ("00" + o[k]).substr(("" + o[k]).length));
             this._date = format;
             return this;

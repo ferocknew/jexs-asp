@@ -5,5 +5,6 @@
 //$.date("2000-09-09 12:12:12","yyyy-MM-dd hh:mm:ss").format("yy-MM").output()
 </script>
 <%
-Jasp.date("2000-09-09 12:12:12","yyyy-MM-dd hh:mm:ss").format("yy-MM").output()
+dateNow=Jasp.date("2010年05月11日","yyyy年MM月dd日").format("yyyy/MM/dd hh:mm:ss").Get()
+Response.Write(DateDiff("d",Now(),dateNow))
 %>
