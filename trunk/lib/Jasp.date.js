@@ -219,6 +219,8 @@
             }); // String
         }
     }
+
+	//定义主类并挂接到Jasp根下
     var datefn = function(value, pattern){
 		if (typeof value=="date") {
 			 this._date =new Date(value);
