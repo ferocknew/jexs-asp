@@ -1,10 +1,14 @@
 ﻿<script Language="JScript" runat="server">
-(function(){
+(function($){
 	//创建ERROR对象
-	Jasp.Error = {};
+	$.Error = function(e){
+		$.Error._E=e;
+	};
 	
-	Jasp.extend(Jasp.Error,{
-		
+	$.extend($.Error,{
+		output: function(){
+			return this._E.description;
+		}
 	});
-})();
+})(Jasp);
 </script>
