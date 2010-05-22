@@ -147,11 +147,6 @@
 			}
 		},
 
-/*
-	public function Ext(path)
-		Ext=ofile.GetExtensionName(path)
-	end function
-*/		
 		clear: function(){
 			$.fso.clear();
 		},
@@ -181,17 +176,10 @@
 		exist: function(){
 			return _fso.FolderExists(this.path);
 		},
-		create: function(){
-			if(this.path){
-				try{
-					//_fso.CreateTextFile(this.path,true).close();
-					this.outputObject='hi';
-				}catch(e){
-					$.Error(e);
-				}
-			}; 
-			return this;
-		},
+		
+		//
+		//
+
 		clear: function(){
 			$.fso.clear();
 		},
