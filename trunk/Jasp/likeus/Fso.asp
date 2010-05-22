@@ -1,90 +1,210 @@
 ﻿<script Language="JScript" runat="server">
 (function($){
-	var fso = {}, file = {}, folder = {};
-	var _fso = server.CreateObject("scripting.filesystemobject");
-	$.extend(fso,{
+	var _fso;
+	
+	//创建fso对象
+	var fso = function(){
+		_fso = server.CreateObject("scripting.filesystemobject");
+		return this;
+	}
+	//为fso对象扩展方法
+	$.extend(fso.prototype,{
 		get: function(){
 			return _fso;
 		},
-		file: file,
-		folder: folder
+		clear: function(){
+			_fso = undefined;
+		},
+		file: function(path){return new file(path)},
+		folder: function(path){return new folder(path)}
 	});
-	$.extend(file,{
-		_file: undefined,
-		_stream: undefined,
-		get: function(path){
+	
+	//创建file对象
+	var file = function(path){
+		this.path = path ? path : undefined;
+		return this;
+	};
+	//为file对象扩展方法
+	$.extend(file.prototype,{
+		get: function(){			//返回file基于path的文件对象
 			try{
-				this._file = path ? _fso.GetFile(path) : this._file;
+				if(this.path){
+					return _fso.GetFile(this.path);
+				}else return ;
 			}catch(e){
-				this._file = undefined;
+				$.Error(e);
+				return ;
+			}
+		},
+		exist: function(){			//判断文件是否存在
+			return _fso.FileExists(this.path);
+		},
+		create: function(){			//创建文件
+			try{
+				if(this.path)
+					_fso.CreateTextFile(this.path,true).close();
+			}catch(e){
 				$.Error(e);
 			}
-			return this._file;
+			return this;
 		},
-		exist: function(path){
-			this._file = path ? (_fso.FileExists(path) ? this.get(path) : undefined) : this._file;
-			return typeof(this._file) === "object";
+		tempCreate: function(path){	//创建随机临时文件
+			try{
+				var _name = _fso.GetTempName();
+				_fso.GetFolder(path).CreateTextFile(_name).close();
+				this.path = _fso.BuildPath(path,_name);
+			}catch(e){
+				$.Error(e);
+			}
+			return this;
 		},
-		create: function(path){
-			this._file = undefined;
-			if(path){
+		read: function(){			//读取文件内容
+			try{
+				if(this.path){
+					var _fs = _fso.OpenTextFile(this.path,1,true);
+					this.outputObject = _fs.AtEndOfLine ? undefined : _fs.ReadAll();
+					_fs.close();
+				}
+			}catch(e){
+				$.Error(e);
+			}
+			return this;
+		},
+		write: function(content){	//写入文件内容
+			try{
+				if(this.path && content){
+					var _fs = _fso.OpenTextFile(this.path,2,true);
+					_fs.Write(content);
+					_fs.close();
+				}
+			}catch(e){
+				$.Error(e);
+			}
+			return this;
+		},
+		append: function(content){	//追加文件内容文件内容
+			try{
+				if(this.path && content){
+					var _fs = _fso.OpenTextFile(this.path,8,true);
+					_fs.Write(content);
+					_fs.close();
+				}
+			}catch(e){
+				$.Error(e);
+			}
+			return this;
+		},
+		Delete: function(){			//删除文件
+			try{
+				_fso.DeleteFile(this.path,true);
+			}catch(e){
+				$.Error(e);
+			}
+			return this;
+		},
+		copy: function(newpath){	//拷贝文件
+			try{
+				_fso.CopyFile(this.path,newpath,true);
+				this.path = _fso.BuildPath(newpath,_fso.GetFileName(this.path));
+			}catch(e){
+				$.Error(e);
+			}
+			return this;
+		},
+		move: function(newpath){
+			try{
+				_fso.MoveFile(this.path,newpath);
+				this.path = _fso.BuildPath(newpath,_fso.GetFileName(this.path));
+			}catch(e){
+				$.Error(e);
+			}
+			return this;
+		},
+		name: function(){
+			try{
+				return _fso.GetFileName(this.path);
+			}catch(e){
+				$.Error(e);
+				return ;
+			}
+		},
+		rename: function(newname){
+			try{
+				_file = this.get(this.path);
+				_file.name = newname
+				this.path = _file.path;
+			}catch(e){
+				$.Error(e);
+			}
+			return this;
+		},
+		ext: function(){
+			try{
+				return _fso.GetExtensionName(this.path);
+			}catch(e){
+				$.Error(e);
+				return ;
+			}
+		},
+
+/*
+	public function Ext(path)
+		Ext=ofile.GetExtensionName(path)
+	end function
+*/		
+		clear: function(){
+			$.fso.clear();
+		},
+		outputObject: undefined,
+		output: function(type){
+			return $.output(this.outputObject,type);
+		}
+	});
+	
+	//创建folder对象
+	var folder = function(path){
+		this.path = path;
+		return this;
+	};
+	//为folder对象扩展方法
+	$.extend(folder.prototype,{
+		get: function(){
+			if(this.path){
 				try{
-					_fso.CreateTextFile(path,true).close();
-					this._file = this.get(path);
+					return _fso.GetFolder(this.path);
+				}catch(e){
+					$.Error(e);
+					return ;
+				}
+			}else return ;
+		},
+		exist: function(){
+			return _fso.FolderExists(this.path);
+		},
+		create: function(){
+			if(this.path){
+				try{
+					//_fso.CreateTextFile(this.path,true).close();
+					this.outputObject='hi';
 				}catch(e){
 					$.Error(e);
 				}
 			}; 
 			return this;
 		},
+		clear: function(){
+			$.fso.clear();
+		},
+		outputObject: undefined,
 		output: function(type){
-			return $.output(this._file,type);
+			return $.output(this.outputObject,type);
 		}
 	});
 	
+	//为$扩展fso对象
 	$.extend({
-		fso: fso
+		fso: new fso()
 	});
-/*
-	//为_File对象扩展方法
-	var _Fso = server.CreateObject("scripting.filesystemobject");
-	//创建FSO,File,Folder对象
-	$.extend({
-		Fso:{
-			Get: function(){
-				return _Fso;
-			},
-			File: {
-				Get: function(path){
-					return _Fso.GetFile(path);
-				},
-				Exist: function(path){
-					return _Fso.FileExists(path)?this.Get(path):null;
-				},
-				Create: function(path){
-					try{
-						newfile=_Fso.CreateTextFile(path,true);
-						newfile.close();
-						return this.Get(path);
-					}catch(e){
-						$.Error(e);
-						return $.Error.output();
-					}
-				},
-				Test: 'HI',
-				output: function(type){
-					$.output(this, type);
-				} 
-			},
-			Folder: {
-				
-			}
-		}
-	});
-
 	
-	//Folder对象
-	var Folder = {};
-*/
 })(Jasp);
 </script>
