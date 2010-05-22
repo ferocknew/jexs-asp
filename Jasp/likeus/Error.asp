@@ -7,7 +7,9 @@
 	
 	$.extend($.Error,{
 		output: function(){
-			return this._E.description;
+			_output = this._E ? this._E.description : undefined;
+			this._E = undefined;
+			return _output;
 		}
 	});
 })(Jasp);
