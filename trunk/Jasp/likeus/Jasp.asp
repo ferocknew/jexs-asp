@@ -1,4 +1,4 @@
-<script Language="JScript" runat="server">
+﻿<script Language="JScript" runat="server">
 /*
  *Jasp ASP Library v0.1
  *
