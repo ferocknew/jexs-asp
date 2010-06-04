@@ -218,9 +218,9 @@ Jasp.extend(Jasp.adodb.prototype, {
         var rs = this._conn.Execute(sql);//=new ActiveXObject("ADODB.Recordset");
         //rs.Open(sql, this._conn,1,1);
         this._rs = rs;
-        if (RType != null)
-            this.fetch(RType);
-
+        if (RType == null)
+			RType=1;
+        this.fetch(RType);
         return this;
     },
     output: function(type){
@@ -267,6 +267,9 @@ Jasp.extend(Jasp.vbo.prototype, {
         this.data = Jasp.vBRows2Obj(this.vbdata, FieldsNameArray_a, fieldslen, RType);
         return this;
     },
+	get: function(){
+		return this.data;
+	},
     output: function(type){
         Jasp.output(this.data, type);
         return this;
