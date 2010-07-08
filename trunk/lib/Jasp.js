@@ -443,6 +443,7 @@ function json2xml(o, tab, tag){
                     }
             }
         }
+		jsEncode=jsEncode.toString().replace(/\\r/g, "\\\\r").replace(/\\n/g,"\\\\n")
         return '"' + jsEncode + '"';
     }
 
