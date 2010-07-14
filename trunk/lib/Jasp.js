@@ -415,37 +415,37 @@ function json2xml(o, tab, tag){
      '"' + string + '"';
      }
      */
-    function quote(str){
-        var i, j, aL1, aL2, c, p, jsEncode = "";
+   function quote(str) {
+    var haystack=[],
+        charmap={
+            8:"\b",
+            9:"\t",
+            10:"\n",
+            12:"\f",
+            13:"\r",
+            34:"\"",
+            47:"\/",
+            92:"\\"
+        };
 
-        aL1 = [0x22, 0x5C, 0x2F, 0x08, 0x0C, 0x0A, 0x0D, 0x09]
-        aL2 = [0x22, 0x5C, 0x2F, 0x62, 0x66, 0x6E, 0x72, 0x74]
-        for (i = 0; i < str.length; i++) {
-            p = true
-            c = str.substr(i, 1)
-            for (j = 0; j < 8; j++) {
-                if (c == String.fromCharCode(aL1[j])) {
-                    jsEncode += "\\" + String.fromCharCode(aL2[j]);
-                    p = false
-                    break;
-                }
-            }
+		var i, charcode;
+        var  strlen =str.length;
+		for( i = 0;i<strlen;i++){
+			haystack[i] =str.charAt(i);
 
-            if (p) {
-                var a
-                a = c.charCodeAt(0);
-                if (a > 31 && a < 127) {
-                    jsEncode = jsEncode + c
+			charcode = haystack[i].charCodeAt(0) & 65535;
+			if(charcode < 127){
+				if(charmap[charcode]){
+					haystack(i) = charmap[charcode];
+				}else if(charcode < 32){
+					haystack[i] = "\\u" +("000" + charcode.toString(16)).slice(-4);
                 }
-                else
-                    if (a > -1 || a < 65535) {
-                        jsEncode = jsEncode + "\\u" + (new Array(4 - a.toString(16).length)).join("0") + a.toString(16)
-                    }
+			}else{
+				haystack[i] = "\\u" +("000" + charcode.toString(16)).slice(-4);
             }
         }
-		jsEncode=jsEncode.toString().replace(/\\r/g, "\\\\r").replace(/\\n/g,"\\\\n")
-        return '"' + jsEncode + '"';
-    }
+		return haystack.join("");
+	}
 
 
     function str(key, holder){
