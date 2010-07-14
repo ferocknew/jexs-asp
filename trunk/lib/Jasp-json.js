@@ -64,14 +64,14 @@ if (typeof JSON=="undefined") {
 	function quote(str) {
         var haystack=[],
             charmap={
-                8:"\b",
-                9:"\t",
-                10:"\n",
-                12:"\f",
-                13:"\r",
-                34:"\"",
-                47:"\/",
-                92:"\\"
+                8:"\\b",
+                9:"\\t",
+                10:"\\n",
+                12:"\\f",
+                13:"\\r",
+                34:"\\\"",
+                47:"\\/",
+                92:"\\\\"
             };
 
         var i, charcode;
@@ -82,7 +82,7 @@ if (typeof JSON=="undefined") {
             charcode = haystack[i].charCodeAt(0) & 65535;
             if(charcode < 127){
                 if(charmap[charcode]){
-                    haystack[i] = charmap[charcode];
+                    haystack[i] =charmap[charcode];
                 }else if(charcode < 32){ 
                     haystack[i] = "\\u" +("000" + charcode.toString(16)).slice(-4);
                 }
